@@ -1,0 +1,35 @@
+.table-container {
+  padding: 0 65px;
+  @media (max-width: 500px) {
+    padding: 0 20px;
+  }
+}
+.table-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #ddd;
+}
+
+.table-name {
+  text-align: center;
+  font-weight: 600;
+  color: #ddd;
+}
+.table-action {
+  button {
+    border: 1px solid #444;
+    padding: 8px;
+    border-radius: 5px;
+    background: none;
+    color: #ddd;
+    text-transform: uppercase;
+    transition: 0.2s all;
+    &:hover {
+      background: #444;
+    }
+  }
+}
+.empty-message {
+  color: #aaaaaa;
+}

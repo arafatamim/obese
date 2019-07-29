@@ -1,0 +1,21 @@
+.grid {
+  display: grid;
+  gap: 25px;
+  padding: 25px;
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas:
+    "height weight"
+    "calculate calculate";
+  box-sizing: border-box;
+
+  @media (max-width: 500px) {
+    grid-template-columns: 1fr;
+    padding: 20px;
+    padding-top: 5px;
+    gap: 20px;
+    grid-template-areas:
+      "height"
+      "weight"
+      "calculate";
+  }
+}
