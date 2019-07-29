@@ -5,7 +5,7 @@ export enum Unit {
   US
 }
 class Store {
-  appName = "BMI Calculator";
+  appName = "Obese";
 
   @observable isModalOpen = false;
 
