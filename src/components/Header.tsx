@@ -20,7 +20,7 @@ const Header: React.FC<{ name: string }> = ({ name }) => {
                   if (location.pathname === "/history") {
                     navigate("/", { replace: true });
                   } else {
-                    navigate("/history", { replace: false });
+                    navigate("/history", { replace: true });
                   }
                 }}
               >
