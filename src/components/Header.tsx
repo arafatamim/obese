@@ -18,9 +18,9 @@ const Header: React.FC<{ name: string }> = ({ name }) => {
                 active={location.pathname === "/history"}
                 onClick={() => {
                   if (location.pathname === "/history") {
-                    navigate("/");
+                    navigate("/", { replace: true });
                   } else {
-                    navigate("/history");
+                    navigate("/history", { replace: false });
                   }
                 }}
               >
