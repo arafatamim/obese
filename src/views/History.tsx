@@ -34,16 +34,7 @@ class History extends React.Component<RouteComponentProps> {
             them here.
           </div>
         ) : (
-          <Table
-            header={[
-              "Date",
-              `Height (${store.heightUnit})`,
-              `Weight (${store.weightUnit})`,
-              "BMI",
-              "Category"
-            ]}
-            items={store.history}
-          />
+          <Table items={store.history} />
         )}
       </div>
     );

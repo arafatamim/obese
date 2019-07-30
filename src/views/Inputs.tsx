@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { store } from "../store";
 import { observer } from "mobx-react";
 import { RouteComponentProps } from "@reach/router";
+import shortid from "shortid";
 
 import { GridContainer } from "../components/UI/Container";
 import { CardWithCounter } from "../components/UI/Card";
@@ -22,13 +23,14 @@ class Inputs extends Component<RouteComponentProps> {
     const bmi = store.calculateBMI;
     const category = store.bmiGroup;
 
-    store.history.push([
-      date.toLocaleDateString(),
+    store.history.unshift({
+      id: shortid.generate(),
+      date: date.toLocaleDateString(),
       height,
       weight,
       bmi,
       category
-    ]);
+    });
     localStorage.setItem("history", JSON.stringify(store.history));
   };
 

@@ -4,6 +4,14 @@ export enum Unit {
   Metric,
   US
 }
+export interface IHistoryItem {
+  id: string;
+  date: string;
+  weight: number;
+  height: number;
+  bmi: number;
+  category: "underweight" | "normal" | "overweight" | "obese";
+}
 class Store {
   appName = "Obese";
 
@@ -12,7 +20,7 @@ class Store {
   @observable unit = Unit.Metric;
   @observable height = 160;
   @observable weight = 60;
-  @observable history: (string | number)[][] = [];
+  @observable history: IHistoryItem[] = [];
 
   @action
   setHeight(value: number) {
@@ -27,7 +35,7 @@ class Store {
     this.history = [];
   }
   @action
-  setHistory(items: (string | number)[][]) {
+  setHistory(items: IHistoryItem[]) {
     this.history = items;
   }
 

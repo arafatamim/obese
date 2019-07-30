@@ -1,36 +1,43 @@
 import React from "react";
 import styles from "./Table.module.scss";
+import { IHistoryItem, store } from "../../store";
 
 interface ITableProps {
-  header: (string | number)[];
-  items: (string | number)[][];
+  items: IHistoryItem[];
 }
 const Table: React.FC<ITableProps> = props => {
   return (
-    <table className={styles.table}>
-      <thead>
-        <tr>
-          {props.header.map((value, index) => {
-            return (
-              <th className={styles.tableHead} key={index}>
-                {value}
-              </th>
-            );
-          })}
-        </tr>
-      </thead>
-      <tbody>
-        {props.items.map((item, index) => {
-          return (
-            <tr key={index}>
-              {item.map((value, index) => {
-                return <td key={index}>{value}</td>;
-              })}
-            </tr>
-          );
-        })}
-      </tbody>
-    </table>
+    <div>
+      {props.items.map((item, index) => (
+        <div className={styles.table} key={index}>
+          <div>
+            <div className={styles.itemName}>
+              Date&ensp;<span className={styles.itemDetail}>{item.date}</span>
+            </div>
+            <div className={styles.itemName}>
+              Height&ensp;
+              <span className={styles.itemDetail}>
+                {item.height} {store.heightUnit}
+              </span>
+            </div>
+            <div className={styles.itemName}>
+              Weight&ensp;
+              <span className={styles.itemDetail}>
+                {item.weight} {store.weightUnit}
+              </span>
+            </div>
+            <div className={styles.itemName}>
+              BMI&ensp;
+              <span className={styles.itemDetail}>{item.bmi}</span>
+            </div>
+            <div className={styles.itemName}>
+              Category&ensp;
+              <span className={styles.itemDetail}>{item.category}</span>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
   );
 };
 
