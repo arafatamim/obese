@@ -1,10 +1,10 @@
 {
   "name": "Obese",
   "short_name": "Obese",
-  "theme_color": "#deb887",
+  "theme_color": "#00d99c",
   "background_color": "#333333",
   "display": "standalone",
-  "start_url": "./index.html",
+  "start_url": "./",
   "icons": [
     {
       "src": "./images/icons/android-chrome-192x192.png",
