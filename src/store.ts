@@ -36,6 +36,16 @@ class Store {
     this.history = items;
   }
 
+  setDefault() {
+    if (this.unit === Unit.US) {
+      this.height = 5.2;
+      this.weight = 132;
+    } else {
+      this.height = 160;
+      this.weight = 60;
+    }
+  }
+
   @action
   convertUnit(unit: Unit) {
     this.unit = unit;
@@ -47,11 +57,12 @@ class Store {
       height: this.convertHeight(item.height, unit),
       weight: this.convertWeight(item.weight, unit),
     }));
+    this.setDefault();
     localStorage.setItem("history", JSON.stringify(this.history));
     localStorage.setItem("unit", unit.toString());
   }
 
-  convertHeight(height: number, unit: Unit) {
+  convertHeight(height: number, unit: Unit): number {
     switch (unit) {
       case Unit.Metric:
         return parseFloat((height * 30.48).toFixed(2));
@@ -59,12 +70,12 @@ class Store {
         return parseFloat((height / 30.48).toFixed(1));
     }
   }
-  convertWeight(weight: number, unit: Unit) {
+  convertWeight(weight: number, unit: Unit): number {
     switch (unit) {
       case Unit.Metric:
-        return weight / 2.205;
+        return parseFloat((weight / 2.205).toFixed());
       case Unit.US:
-        return weight * 2.205;
+        return parseFloat((weight * 2.205).toFixed());
     }
   }
 

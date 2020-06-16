@@ -17,6 +17,7 @@ const App: React.FunctionComponent = () => {
     }
     if (localStorage.getItem("unit")) {
       store.unit = parseInt(localStorage.getItem("unit")!);
+      store.setDefault();
     }
   }, []);
 
