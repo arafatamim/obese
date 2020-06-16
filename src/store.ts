@@ -1,13 +1,5 @@
-import {
-  observable,
-  action,
-  computed,
-  intercept,
-  observe,
-  values,
-  reaction,
-} from "mobx";
-import { IHistoryItem, Unit } from "./types";
+import { observable, action, computed } from "mobx";
+import { Unit, IHistoryItem } from "./types";
 
 class Store {
   appName = "Obese";

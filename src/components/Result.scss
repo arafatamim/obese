@@ -63,16 +63,16 @@
   font-size: 40pt;
   text-align: center;
   &_underweight {
-    color: rgb(219, 124, 0);
+    color: #db7c00;
   }
   &_normal {
-    color: rgb(0, 190, 117);
+    color: #00be75;
   }
   &_overweight {
-    color: rgb(223, 119, 0);
+    color: #df7700;
   }
   &_obese {
-    color: rgb(209, 0, 0);
+    color: #d10000;
   }
   @media (max-width: 500px) {
     font-size: 30pt;
