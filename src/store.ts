@@ -1,17 +1,14 @@
-import { observable, action, computed } from "mobx";
+import {
+  observable,
+  action,
+  computed,
+  intercept,
+  observe,
+  values,
+  reaction,
+} from "mobx";
+import { IHistoryItem, Unit } from "./types";
 
-export enum Unit {
-  Metric,
-  US
-}
-export interface IHistoryItem {
-  id: string;
-  date: string;
-  weight: number;
-  height: number;
-  bmi: number;
-  category: "underweight" | "normal" | "overweight" | "obese";
-}
 class Store {
   appName = "Obese";
 
@@ -37,6 +34,38 @@ class Store {
   @action
   setHistory(items: IHistoryItem[]) {
     this.history = items;
+  }
+
+  @action
+  convertUnit(unit: Unit) {
+    this.unit = unit;
+    this.history = this.history.map<IHistoryItem>((item) => ({
+      id: item.id,
+      bmi: item.bmi,
+      category: item.category,
+      date: item.date,
+      height: this.convertHeight(item.height, unit),
+      weight: this.convertWeight(item.weight, unit),
+    }));
+    localStorage.setItem("history", JSON.stringify(this.history));
+    localStorage.setItem("unit", unit.toString());
+  }
+
+  convertHeight(height: number, unit: Unit) {
+    switch (unit) {
+      case Unit.Metric:
+        return parseFloat((height * 30.48).toFixed(2));
+      case Unit.US:
+        return parseFloat((height / 30.48).toFixed(1));
+    }
+  }
+  convertWeight(weight: number, unit: Unit) {
+    switch (unit) {
+      case Unit.Metric:
+        return weight / 2.205;
+      case Unit.US:
+        return weight * 2.205;
+    }
   }
 
   @computed get calculateBMI(): number {

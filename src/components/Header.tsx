@@ -1,34 +1,32 @@
 import React from "react";
-import { navigate, Location } from "@reach/router";
-
+import { useLocation, useHistory } from "react-router-dom";
 import "./Header.scss";
-import { List } from "react-feather";
+import { List, Settings } from "react-feather";
 
-import { IconButton } from "./UI/Button";
+import { IconButton, TextButton } from "./UI/Button";
 
-const Header: React.FC<{ name: string }> = ({ name }) => {
+const Header: React.FunctionComponent<{ name: string }> = ({ name }) => {
+  const location = useLocation();
+  const history = useHistory();
+
   return (
     <>
       <div className="header-container">
         <span>{name}</span>
-        <Location>
-          {({ location }) => {
-            return (
-              <IconButton
-                active={location.pathname === "/history"}
-                onClick={() => {
-                  if (location.pathname === "/history") {
-                    navigate("/", { replace: true });
-                  } else {
-                    navigate("/history", { replace: true });
-                  }
-                }}
-              >
-                <List style={{ boxSizing: "content-box" }} />
-              </IconButton>
-            );
-          }}
-        </Location>
+        <div className="right-aligned">
+          <IconButton
+            active={location.pathname === "/history"}
+            onClick={() => {
+              if (location.pathname === "/history") {
+                // navigate("/", { replace: true });
+                history.replace("/");
+              } else {
+                history.replace("/history");
+              }
+            }}>
+            <List style={{ boxSizing: "content-box" }} />
+          </IconButton>
+        </div>
       </div>
     </>
   );

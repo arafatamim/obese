@@ -11,7 +11,7 @@ export const CardWithCounter: React.FC<{
   icon: JSX.Element;
   style?: React.CSSProperties;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-}> = props => (
+}> = (props) => (
   <div className={styles.counterCard} style={props.style}>
     <div className={styles.cardHeader}>
       <div>
@@ -22,7 +22,6 @@ export const CardWithCounter: React.FC<{
       </div>
       <div className={styles.cardIcon}>{props.icon}</div>
     </div>
-
     <input
       type="range"
       min={props.min}

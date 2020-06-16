@@ -4,5 +4,12 @@ body {
   background: #333;
   background-repeat: no-repeat;
   background-attachment: fixed;
-  font-family: Poppins, sans-serif;
+  font-family: "Poppins", sans-serif;
+  input:focus,
+  button:focus {
+    outline: none;
+  }
 }
+// * {
+//   outline: solid blue 1px;
+// }

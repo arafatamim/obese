@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { store } from "../store";
 import { observer } from "mobx-react";
-import { RouteComponentProps } from "@reach/router";
 import shortid from "shortid";
 
 import { GridContainer } from "../components/UI/Container";
@@ -13,7 +12,7 @@ import { ReactComponent as Height } from "../assets/height.svg";
 import { ReactComponent as Weight } from "../assets/weight.svg";
 
 @observer
-class Inputs extends Component<RouteComponentProps> {
+class Inputs extends Component {
   buttonClick = () => {
     store.isModalOpen = true;
 
@@ -29,7 +28,7 @@ class Inputs extends Component<RouteComponentProps> {
       height,
       weight,
       bmi,
-      category
+      category,
     });
     localStorage.setItem("history", JSON.stringify(store.history));
   };
@@ -46,7 +45,7 @@ class Inputs extends Component<RouteComponentProps> {
           step={store.stepValueHeight}
           unit={store.heightUnit}
           icon={<Height width={50} fill="#222" />}
-          onChange={e => {
+          onChange={(e) => {
             store.setHeight(Number(e.target.value));
           }}
         />
@@ -59,16 +58,15 @@ class Inputs extends Component<RouteComponentProps> {
           step={store.stepValueWeight}
           unit={store.weightUnit}
           icon={<Weight width={50} fill="#222" />}
-          onChange={e => {
+          onChange={(e) => {
             store.setWeight(Number(e.target.value));
           }}
         />
         <TextButton
           style={{
-            gridArea: "calculate"
+            gridArea: "calculate",
           }}
-          onClick={this.buttonClick}
-        >
+          onClick={this.buttonClick}>
           Calculate BMI
         </TextButton>
         <Result />

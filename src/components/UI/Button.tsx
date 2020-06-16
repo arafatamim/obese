@@ -17,15 +17,30 @@ export const IconButton: React.FC<{
   children?: React.ReactNode;
   style?: React.CSSProperties;
   active?: boolean;
+  plain?: boolean;
   onClick?: () => void;
-}> = ({ children, style, active, onClick }) => {
+}> = ({ children, style, active, onClick, plain }) => {
   return (
     <button
-      className={`${styles.iconButton} ${active && styles.active}`}
+      className={`${styles.iconButton} ${active && styles.active} ${
+        plain && styles.plain
+      }`}
       style={style}
-      onClick={onClick}
-    >
+      onClick={onClick}>
       {children}
     </button>
   );
 };
+
+export const PlainButton: React.FC<{
+  children?: React.ReactNode;
+  style?: React.CSSProperties;
+  onClick?: () => void;
+}> = (props) => (
+  <button
+    className={styles.plainButton}
+    style={props.style}
+    onClick={props.onClick}>
+    {props.children}
+  </button>
+);

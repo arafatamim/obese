@@ -1,5 +1,4 @@
 import React from "react";
-import { RouteComponentProps } from "@reach/router";
 import { observer } from "mobx-react";
 import "./History.scss";
 
@@ -8,7 +7,7 @@ import { store } from "../store";
 import Table from "../components/UI/Table";
 
 @observer
-class History extends React.Component<RouteComponentProps> {
+class History extends React.Component {
   render() {
     return (
       <div className="table-container">
