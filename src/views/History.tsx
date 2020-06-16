@@ -5,12 +5,12 @@ import "./History.scss";
 import { store } from "../store";
 
 import { Line } from "react-chartjs-2";
-import { BarChart } from "react-feather";
-
+import { useHistory } from "react-router-dom";
 import Table from "../components/UI/Table";
 
 const History: React.FC = () => {
-  const [hidden, setHidden] = useState<boolean>(false);
+  const [showGraph, setShowGraph] = useState<boolean>(false);
+  const history = useHistory();
 
   return (
     <div className="table-container">
@@ -21,18 +21,19 @@ const History: React.FC = () => {
           <span className="table-action">
             <button
               onClick={() => {
+                history.replace("/");
                 store.clearHistory();
                 localStorage.removeItem("history");
               }}>
               Clear
             </button>
-            <button onClick={() => setHidden(!hidden)}>
-              {hidden ? "Hide" : "Show"} Graph
+            <button onClick={() => setShowGraph(!showGraph)}>
+              {showGraph ? "Hide" : "Show"} Graph
             </button>
           </span>
         )}
       </div>
-      {hidden && (
+      {showGraph && (
         <div style={{ marginBottom: "20px" }}>
           <Line
             data={{
