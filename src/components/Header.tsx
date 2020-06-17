@@ -15,10 +15,10 @@ const Header: React.FunctionComponent<{ name: string }> = ({ name }) => {
         <span>{name}</span>
         <div className="right-aligned">
           <IconButton
+            ariaLabel="history"
             active={location.pathname === "/history"}
             onClick={() => {
               if (location.pathname === "/history") {
-                // navigate("/", { replace: true });
                 history.replace("/");
               } else {
                 history.replace("/history");

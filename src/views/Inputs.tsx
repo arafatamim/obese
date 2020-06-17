@@ -41,6 +41,7 @@ class Inputs extends Component {
         animate={{ y: 0, opacity: 1 }}>
         <GridContainer>
           <CardWithCounter
+            id="height"
             style={{ gridArea: "height" }}
             title="Height"
             value={store.height}
@@ -54,6 +55,7 @@ class Inputs extends Component {
             }}
           />
           <CardWithCounter
+            id="weight"
             style={{ gridArea: "weight" }}
             title="Weight"
             value={store.weight}

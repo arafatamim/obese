@@ -18,10 +18,12 @@ export const IconButton: React.FC<{
   style?: React.CSSProperties;
   active?: boolean;
   plain?: boolean;
+  ariaLabel: string;
   onClick?: () => void;
-}> = ({ children, style, active, onClick, plain }) => {
+}> = ({ children, style, active, onClick, plain, ariaLabel }) => {
   return (
     <button
+      aria-label={ariaLabel}
       className={`${styles.iconButton} ${active && styles.active} ${
         plain && styles.plain
       }`}
