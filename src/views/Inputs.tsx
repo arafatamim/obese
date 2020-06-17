@@ -10,6 +10,7 @@ import Result from "../components/Result";
 
 import { ReactComponent as Height } from "../assets/height.svg";
 import { ReactComponent as Weight } from "../assets/weight.svg";
+import { motion } from "framer-motion";
 
 @observer
 class Inputs extends Component {
@@ -35,42 +36,46 @@ class Inputs extends Component {
 
   render() {
     return (
-      <GridContainer>
-        <CardWithCounter
-          style={{ gridArea: "height" }}
-          title="Height"
-          value={store.height}
-          min={store.minHeight}
-          max={store.maxHeight}
-          step={store.stepValueHeight}
-          unit={store.heightUnit}
-          icon={<Height width={50} fill="#222" />}
-          onChange={(e) => {
-            store.setHeight(Number(e.target.value));
-          }}
-        />
-        <CardWithCounter
-          style={{ gridArea: "weight" }}
-          title="Weight"
-          value={store.weight}
-          min={store.minWeight}
-          max={store.maxWeight}
-          step={store.stepValueWeight}
-          unit={store.weightUnit}
-          icon={<Weight width={50} fill="#222" />}
-          onChange={(e) => {
-            store.setWeight(Number(e.target.value));
-          }}
-        />
-        <TextButton
-          style={{
-            gridArea: "calculate",
-          }}
-          onClick={this.buttonClick}>
-          Calculate BMI
-        </TextButton>
-        <Result />
-      </GridContainer>
+      <motion.div
+        initial={{ y: -200, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}>
+        <GridContainer>
+          <CardWithCounter
+            style={{ gridArea: "height" }}
+            title="Height"
+            value={store.height}
+            min={store.minHeight}
+            max={store.maxHeight}
+            step={store.stepValueHeight}
+            unit={store.heightUnit}
+            icon={<Height width={50} fill="#222" />}
+            onChange={(e) => {
+              store.setHeight(Number(e.target.value));
+            }}
+          />
+          <CardWithCounter
+            style={{ gridArea: "weight" }}
+            title="Weight"
+            value={store.weight}
+            min={store.minWeight}
+            max={store.maxWeight}
+            step={store.stepValueWeight}
+            unit={store.weightUnit}
+            icon={<Weight width={50} fill="#222" />}
+            onChange={(e) => {
+              store.setWeight(Number(e.target.value));
+            }}
+          />
+          <TextButton
+            style={{
+              gridArea: "calculate",
+            }}
+            onClick={this.buttonClick}>
+            Calculate BMI
+          </TextButton>
+          <Result />
+        </GridContainer>
+      </motion.div>
     );
   }
 }

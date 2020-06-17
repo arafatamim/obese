@@ -1,4 +1,4 @@
-import React, { Children } from "react";
+import React from "react";
 import styles from "./BottomSheet.module.scss";
 
 export const BottomSheet: React.FC<{

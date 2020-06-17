@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, RefObject } from "react";
+import React from "react";
 
 import { store } from "./store";
 
@@ -10,10 +10,7 @@ import { Unit } from "./types";
 import { PlainButton } from "./components/UI/Button";
 import { BottomSheet } from "./components/UI/BottomSheet";
 
-import { Line, ChartData } from "react-chartjs-2";
-
 const App: React.FunctionComponent = () => {
-  // useEffect(() => {
   if (localStorage.getItem("history")) {
     store.setHistory(JSON.parse(localStorage.getItem("history")!));
   }
@@ -21,14 +18,11 @@ const App: React.FunctionComponent = () => {
     store.unit = parseInt(localStorage.getItem("unit")!);
     store.setDefault();
   }
-  // });
-  console.log(store.history.map((item) => item.bmi));
 
   return (
-    <div>
-      <Router>
-        <Header name={store.appName} />
-
+    <Router>
+      <Header name={store.appName} />
+      <Route>
         <Switch>
           <Route exact path="/">
             <Inputs />
@@ -46,8 +40,8 @@ const App: React.FunctionComponent = () => {
             <History />
           </Route>
         </Switch>
-      </Router>
-    </div>
+      </Route>
+    </Router>
   );
 };
 

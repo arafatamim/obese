@@ -17,6 +17,7 @@
   color: #ddd;
 }
 .table-action {
+  transition: 0.2s all;
   button {
     margin-left: 10px;
     border: 1px solid #444;
@@ -26,6 +27,9 @@
     color: #ddd;
     text-transform: uppercase;
     transition: 0.2s all;
+    &:focus {
+      box-shadow: inset 0px 0px 0px 2px aqua;
+    }
     &:hover {
       background: #444;
     }

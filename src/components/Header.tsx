@@ -1,9 +1,9 @@
 import React from "react";
 import { useLocation, useHistory } from "react-router-dom";
 import "./Header.scss";
-import { List, Settings } from "react-feather";
+import { List } from "react-feather";
 
-import { IconButton, TextButton } from "./UI/Button";
+import { IconButton } from "./UI/Button";
 
 const Header: React.FunctionComponent<{ name: string }> = ({ name }) => {
   const location = useLocation();

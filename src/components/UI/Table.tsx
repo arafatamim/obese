@@ -2,13 +2,14 @@ import React from "react";
 import styles from "./Table.module.scss";
 import { store } from "../../store";
 import { IHistoryItem } from "../../types";
+import { motion } from "framer-motion";
 
 interface ITableProps {
   items: IHistoryItem[];
 }
 const Table: React.FC<ITableProps> = (props) => {
   return (
-    <div>
+    <motion.div positionTransition>
       {props.items.map((item, index) => (
         <div className={styles.table} key={index}>
           <div>
@@ -41,7 +42,7 @@ const Table: React.FC<ITableProps> = (props) => {
           </div>
         </div>
       ))}
-    </div>
+    </motion.div>
   );
 };
 

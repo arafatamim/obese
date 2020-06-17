@@ -1,9 +1,7 @@
+import { observer } from "mobx-react";
 import React from "react";
 import Modal from "react-modal";
-import { observer } from "mobx-react";
-
 import { store } from "../store";
-
 import "./Result.scss";
 
 Modal.setAppElement("body");
@@ -33,8 +31,7 @@ class Result extends React.Component {
         className="modal"
         overlayClassName="overlay"
         bodyOpenClassName="modal-body--open"
-        closeTimeoutMS={200}
-      >
+        closeTimeoutMS={200}>
         <h1 className={`bmi-group bmi-group_${store.bmiGroup}`}>
           {store.bmiGroup.toUpperCase()}
         </h1>
