@@ -1,14 +1,13 @@
+import { motion } from "framer-motion";
 import React from "react";
-
-import { store } from "./store";
-
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Header from "./components/Header";
-import Inputs from "./views/Inputs";
-import History from "./views/History";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { Unit } from "./types";
-import { PlainButton } from "./components/UI/Button";
 import { BottomSheet } from "./components/UI/BottomSheet";
+import { PlainButton } from "./components/UI/Button";
+import { store } from "./store";
+import { Unit } from "./types";
+import History from "./views/History";
+import Inputs from "./views/Inputs";
 
 const App: React.FunctionComponent = () => {
   if (localStorage.getItem("history")) {
@@ -27,13 +26,15 @@ const App: React.FunctionComponent = () => {
           <Route exact path="/">
             <Inputs />
             <BottomSheet>
-              <PlainButton
-                onClick={() => {
-                  if (store.unit === Unit.Metric) store.convertUnit(Unit.US);
-                  else store.convertUnit(Unit.Metric);
-                }}>
-                Change unit
-              </PlainButton>
+              <motion.div animate={{ opacity: 1 }} initial={{ opacity: 0 }}>
+                <PlainButton
+                  onClick={() => {
+                    if (store.unit === Unit.Metric) store.convertUnit(Unit.US);
+                    else store.convertUnit(Unit.Metric);
+                  }}>
+                  Change unit
+                </PlainButton>
+              </motion.div>
             </BottomSheet>
           </Route>
           <Route exact path="/history">
