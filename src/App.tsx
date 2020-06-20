@@ -11,10 +11,10 @@ import Inputs from "./views/Inputs";
 
 const App: React.FunctionComponent = () => {
   if (localStorage.getItem("history")) {
-    store.setHistory(JSON.parse(localStorage.getItem("history")!));
+    store.setHistory(JSON.parse(localStorage.getItem("history") ?? "[]"));
   }
   if (localStorage.getItem("unit")) {
-    store.unit = parseInt(localStorage.getItem("unit")!);
+    store.unit = parseInt(localStorage.getItem("unit") ?? "0");
     store.setDefault();
   }
 
