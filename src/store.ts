@@ -1,5 +1,6 @@
 import { observable, action, computed } from "mobx";
 import { Unit, IHistoryItem } from "./types";
+import { createContext } from "react";
 
 class Store {
   appName = "Obese";
@@ -120,4 +121,7 @@ class Store {
   }
 }
 
-export const store = new Store();
+const store = new Store();
+const StoreContext = createContext(store);
+
+export default StoreContext;

@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useContext } from "react";
 import styles from "./Table.module.scss";
-import { store } from "../../store";
+import StoreContext from "../../store";
 import { IHistoryItem } from "../../types";
 import { motion } from "framer-motion";
 
@@ -8,6 +8,8 @@ interface ITableProps {
   items: IHistoryItem[];
 }
 const Table: React.FC<ITableProps> = (props) => {
+  const store = useContext(StoreContext);
+
   return (
     <motion.div positionTransition>
       {props.items.map((item, index) => (

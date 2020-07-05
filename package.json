@@ -14,7 +14,7 @@
     "emotion-theming": "^10.0.27",
     "framer-motion": "^1.11.1",
     "mobx": "^5.15.4",
-    "mobx-react": "^6.2.2",
+    "mobx-react-lite": "^2.0.7",
     "node-sass": "^4.14.1",
     "normalize.css": "^8.0.1",
     "react": "^16.13.1",

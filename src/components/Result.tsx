@@ -1,14 +1,15 @@
-import { observer } from "mobx-react";
-import React from "react";
+import { observer } from "mobx-react-lite";
+import React, { useContext } from "react";
 import Modal from "react-modal";
-import { store } from "../store";
+import StoreContext from "../store";
 import "./Result.scss";
 
 Modal.setAppElement("body");
 
-@observer
-class Result extends React.Component {
-  descriptionText = (): string => {
+const Result = () => {
+  const store = useContext(StoreContext);
+
+  const descriptionText = (): string => {
     if (store.bmiGroup === "underweight") {
       return "Talk to your health supervisor to determine possible causes of underweight for adults of your age and seek advice on how to improve your condition.";
     } else if (store.bmiGroup === "normal") {
@@ -20,28 +21,26 @@ class Result extends React.Component {
     }
   };
 
-  render() {
-    return (
-      <Modal
-        isOpen={store.isModalOpen}
-        shouldCloseOnOverlayClick={true}
-        onRequestClose={() => {
-          store.isModalOpen = false;
-        }}
-        className="modal"
-        overlayClassName="overlay"
-        bodyOpenClassName="modal-body--open"
-        closeTimeoutMS={200}>
-        <h1 className={`bmi-group bmi-group_${store.bmiGroup}`}>
-          {store.bmiGroup.toUpperCase()}
-        </h1>
-        <p className="bmi-value-text">
-          You have a BMI value of <strong>{store.calculateBMI}</strong>
-        </p>
-        <p className="description-text">{this.descriptionText()}</p>
-      </Modal>
-    );
-  }
-}
+  return (
+    <Modal
+      isOpen={store.isModalOpen}
+      shouldCloseOnOverlayClick={true}
+      onRequestClose={() => {
+        store.isModalOpen = false;
+      }}
+      className="modal"
+      overlayClassName="overlay"
+      bodyOpenClassName="modal-body--open"
+      closeTimeoutMS={200}>
+      <h1 className={`bmi-group bmi-group_${store.bmiGroup}`}>
+        {store.bmiGroup.toUpperCase()}
+      </h1>
+      <p className="bmi-value-text">
+        You have a BMI value of <strong>{store.calculateBMI}</strong>
+      </p>
+      <p className="description-text">{descriptionText()}</p>
+    </Modal>
+  );
+};
 
-export default Result;
+export default observer(Result);

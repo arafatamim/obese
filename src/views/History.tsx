@@ -1,13 +1,14 @@
 import { AnimatePresence, motion } from "framer-motion";
-import { observer } from "mobx-react";
-import React, { useState } from "react";
+import { observer } from "mobx-react-lite";
+import React, { useState, useContext } from "react";
 import { Line } from "react-chartjs-2";
 import { useHistory } from "react-router-dom";
 import Table from "../components/UI/Table";
-import { store } from "../store";
+import StoreContext from "../store";
 import "./History.scss";
 
 const History: React.FC = () => {
+  const store = useContext(StoreContext);
   const [showGraph, setShowGraph] = useState<boolean>(false);
   const history = useHistory();
 
