@@ -1,11 +1,15 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { observer } from "mobx-react-lite";
-import React, { useState, useContext } from "react";
-import { Line } from "react-chartjs-2";
+import React, { useState, useContext, lazy, Suspense } from "react";
+// import { Line } from "react-chartjs-2";
 import { useHistory } from "react-router-dom";
 import Table from "../components/UI/Table";
 import StoreContext from "../store";
 import "./History.scss";
+
+const Line = lazy(() =>
+  import("react-chartjs-2").then(({ Line }) => ({ default: Line }))
+);
 
 const History: React.FC = () => {
   const store = useContext(StoreContext);
@@ -45,32 +49,36 @@ const History: React.FC = () => {
             initial={{ y: -50, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             style={{ marginBottom: "20px" }}>
-            <Line
-              data={{
-                labels: store.history.map((item) => item.date),
-                datasets: [
-                  {
-                    label: "BMI",
-                    borderColor: "#00d99c",
-                    pointBackgroundColor: store.history.map<string>((item) => {
-                      switch (item.category) {
-                        case "normal":
-                          return "#00be75";
-                        case "obese":
-                          return "#d10000";
-                        case "overweight":
-                          return "#df7700";
-                        case "underweight":
-                          return "#db7c00";
-                        default:
-                          return "white";
-                      }
-                    }),
-                    data: store.history.map((item) => item.bmi),
-                  },
-                ],
-              }}
-            />
+            <Suspense fallback={<div>Loading...</div>}>
+              <Line
+                data={{
+                  labels: store.history.map((item) => item.date),
+                  datasets: [
+                    {
+                      label: "BMI",
+                      borderColor: "#00d99c",
+                      pointBackgroundColor: store.history.map<string>(
+                        (item) => {
+                          switch (item.category) {
+                            case "normal":
+                              return "#00be75";
+                            case "obese":
+                              return "#d10000";
+                            case "overweight":
+                              return "#df7700";
+                            case "underweight":
+                              return "#db7c00";
+                            default:
+                              return "white";
+                          }
+                        }
+                      ),
+                      data: store.history.map((item) => item.bmi),
+                    },
+                  ],
+                }}
+              />
+            </Suspense>
           </motion.div>
         )}
         {store.history.length === 0 ? (

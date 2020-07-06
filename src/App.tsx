@@ -1,13 +1,14 @@
 import { motion } from "framer-motion";
-import React, { useContext } from "react";
+import React, { lazy, Suspense, useContext } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Header from "./components/Header";
 import { BottomSheet } from "./components/UI/BottomSheet";
 import { PlainButton } from "./components/UI/Button";
 import StoreContext from "./store";
 import { Unit } from "./types";
-import History from "./views/History";
 import Inputs from "./views/Inputs";
+
+const History = lazy(() => import("./views/History"));
 
 const App: React.FunctionComponent = () => {
   const store = useContext(StoreContext);
@@ -42,7 +43,9 @@ const App: React.FunctionComponent = () => {
               </BottomSheet>
             </Route>
             <Route exact path="/history">
-              <History />
+              <Suspense fallback={<div>...</div>}>
+                <History />
+              </Suspense>
             </Route>
           </Switch>
         </Route>
