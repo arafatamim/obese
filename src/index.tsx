@@ -6,8 +6,14 @@ import * as serviceWorker from "./serviceWorker";
 import "normalize.css";
 import "typeface-poppins";
 import "./styles.scss";
+import StoreProvider from "./store/StoreContext";
 
-ReactDOM.render(<App />, document.getElementById("root"));
+ReactDOM.render(
+  <StoreProvider>
+    <App />
+  </StoreProvider>,
+  document.getElementById("root"),
+);
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

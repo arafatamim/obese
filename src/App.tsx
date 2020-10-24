@@ -1,56 +1,61 @@
 import { motion } from "framer-motion";
-import React, { lazy, Suspense, useContext } from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import React, { Dispatch, lazy, Suspense, useContext, useEffect } from "react";
 import Header from "./components/Header";
 import { BottomSheet } from "./components/UI/BottomSheet";
 import { PlainButton } from "./components/UI/Button";
-import StoreContext from "./store";
-import { Unit } from "./types";
+import { StoreContext } from "./store/StoreContext";
+import { State, Unit } from "./types";
+import { Action, ActionType } from "./types/action";
 import Inputs from "./views/Inputs";
+import { Route } from "wouter";
 
 const History = lazy(() => import("./views/History"));
 
-const App: React.FunctionComponent = () => {
-  const store = useContext(StoreContext);
+function renderBottomSheet(state: State, dispatch: Dispatch<Action>) {
+  return (
+    <motion.div animate={{ opacity: 1 }} initial={{ opacity: 0 }}>
+      <PlainButton
+        onClick={() => {
+          if (state.unit === Unit.Metric)
+            dispatch({
+              type: ActionType.SetUnit,
+              payload: Unit.US,
+            });
+          else
+            dispatch({
+              type: ActionType.SetUnit,
+              payload: Unit.Metric,
+            });
+        }}>
+        Change unit
+      </PlainButton>
+    </motion.div>
+  );
+}
 
-  if (localStorage.getItem("history")) {
-    store.setHistory(JSON.parse(localStorage.getItem("history") ?? "[]"));
-  }
-  if (localStorage.getItem("unit")) {
-    store.unit = parseInt(localStorage.getItem("unit") ?? "0");
-    store.setDefault();
-  }
+const App: React.FunctionComponent = () => {
+  const [state, dispatch] = useContext(StoreContext);
+
+  useEffect(() => {
+    localStorage.setItem("history", JSON.stringify(state.history));
+    localStorage.setItem("unit", JSON.stringify(state.unit));
+  }, [state.history, state.unit]);
 
   return (
-    <StoreContext.Provider value={store}>
-      <Router>
-        <Header name={store.appName} />
-        <Route>
-          <Switch>
-            <Route exact path="/">
-              <Inputs />
-              <BottomSheet>
-                <motion.div animate={{ opacity: 1 }} initial={{ opacity: 0 }}>
-                  <PlainButton
-                    onClick={() => {
-                      if (store.unit === Unit.Metric)
-                        store.convertUnit(Unit.US);
-                      else store.convertUnit(Unit.Metric);
-                    }}>
-                    Change unit
-                  </PlainButton>
-                </motion.div>
-              </BottomSheet>
-            </Route>
-            <Route exact path="/history">
-              <Suspense fallback={<div>...</div>}>
-                <History />
-              </Suspense>
-            </Route>
-          </Switch>
-        </Route>
-      </Router>
-    </StoreContext.Provider>
+    <>
+      <Header name="Obese" />
+
+      <Route path="/">
+        <Inputs />
+        <BottomSheet>{renderBottomSheet(state, dispatch)}</BottomSheet>
+      </Route>
+
+      <Route path="/history">
+        <Suspense fallback={<></>}>
+          <History />
+        </Suspense>
+      </Route>
+    </>
   );
 };
 

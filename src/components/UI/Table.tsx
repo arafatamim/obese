@@ -1,17 +1,17 @@
 import React, { useContext } from "react";
 import styles from "./Table.module.scss";
-import StoreContext from "../../store";
-import { IHistoryItem } from "../../types";
+import { HistoryItem, Unit } from "../../types";
 import { motion } from "framer-motion";
+import { StoreContext } from "../../store/StoreContext";
 
 interface ITableProps {
-  items: IHistoryItem[];
+  items: HistoryItem[];
 }
 const Table: React.FC<ITableProps> = (props) => {
-  const store = useContext(StoreContext);
+  const [state] = useContext(StoreContext);
 
   return (
-    <motion.div positionTransition>
+    <motion.div layout="position">
       {props.items.map((item, index) => (
         <div className={styles.table} key={index}>
           <div>
@@ -21,12 +21,12 @@ const Table: React.FC<ITableProps> = (props) => {
             <div className={`${styles.heightWeight} ${styles.numbers}`}>
               <div className={styles.itemName}>
                 <span className={styles.itemDetail}>
-                  {item.height} {store.heightUnit}
+                  {item.height} {state.unit === Unit.Metric ? "cm" : "ft"}
                 </span>
               </div>
               <div className={styles.itemName}>
                 <span className={styles.itemDetail}>
-                  {item.weight} {store.weightUnit}
+                  {item.weight} {state.unit === Unit.Metric ? "kg" : "lbs"}
                 </span>
               </div>
             </div>

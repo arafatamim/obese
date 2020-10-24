@@ -1,20 +1,20 @@
 import { AnimatePresence, motion } from "framer-motion";
-import { observer } from "mobx-react-lite";
 import React, { useState, useContext, lazy, Suspense } from "react";
+import { useLocation } from "wouter";
 // import { Line } from "react-chartjs-2";
-import { useHistory } from "react-router-dom";
 import Table from "../components/UI/Table";
-import StoreContext from "../store";
+import { StoreContext } from "../store/StoreContext";
+import { ActionType } from "../types/action";
 import "./History.scss";
 
 const Line = lazy(() =>
-  import("react-chartjs-2").then(({ Line }) => ({ default: Line }))
+  import("react-chartjs-2").then(({ Line }) => ({ default: Line })),
 );
 
 const History: React.FC = () => {
-  const store = useContext(StoreContext);
+  const [state, dispatch] = useContext(StoreContext);
   const [showGraph, setShowGraph] = useState<boolean>(false);
-  const history = useHistory();
+  const [, setLocation] = useLocation();
 
   return (
     <AnimatePresence>
@@ -26,12 +26,12 @@ const History: React.FC = () => {
         <div className="table-title">
           <h2 className="table-name">History</h2>
 
-          {store.history.length !== 0 && (
+          {state.history.length !== 0 && (
             <span className="table-action">
               <button
                 onClick={() => {
-                  history.replace("/");
-                  store.clearHistory();
+                  setLocation("/");
+                  dispatch({ type: ActionType.ClearHistory });
                   localStorage.removeItem("history");
                 }}>
                 Clear
@@ -52,12 +52,12 @@ const History: React.FC = () => {
             <Suspense fallback={<div>Loading...</div>}>
               <Line
                 data={{
-                  labels: store.history.map((item) => item.date),
+                  labels: state.history.map((item) => item.date),
                   datasets: [
                     {
                       label: "BMI",
                       borderColor: "#00d99c",
-                      pointBackgroundColor: store.history.map<string>(
+                      pointBackgroundColor: state.history.map<string>(
                         (item) => {
                           switch (item.category) {
                             case "normal":
@@ -71,9 +71,9 @@ const History: React.FC = () => {
                             default:
                               return "white";
                           }
-                        }
+                        },
                       ),
-                      data: store.history.map((item) => item.bmi),
+                      data: state.history.map((item) => item.bmi),
                     },
                   ],
                 }}
@@ -81,14 +81,14 @@ const History: React.FC = () => {
             </Suspense>
           </motion.div>
         )}
-        {store.history.length === 0 ? (
+        {state.history.length === 0 ? (
           <div className="empty-message">
             History is empty. Go back and perform some calculations to track
             them here.
           </div>
         ) : (
           <AnimatePresence>
-            <Table items={store.history} />
+            <Table items={state.history} />
           </AnimatePresence>
         )}
       </motion.div>
@@ -96,4 +96,4 @@ const History: React.FC = () => {
   );
 };
 
-export default observer(History);
+export default History;

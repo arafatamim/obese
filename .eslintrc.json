@@ -5,7 +5,7 @@
   },
   "extends": [
     // "eslint:recommended",
-    // "plugin:react/recommended",
+    "plugin:react/recommended",
     "plugin:@typescript-eslint/eslint-recommended"
   ],
   "globals": {
@@ -20,9 +20,16 @@
     "ecmaVersion": 2020,
     "sourceType": "module"
   },
-  "plugins": ["react", "@typescript-eslint", "prettier"],
+  "plugins": [
+    "react",
+    "@typescript-eslint",
+    "prettier"
+  ],
   "rules": {
-    "prettier/prettier": "warn"
+    "prettier/prettier": "off",
+    "react/jsx-uses-react": "off",
+    "react/react-in-jsx-scope": "off",
+    "react/prop-types": "off"
     // "indent": ["warn", 2],
     // "linebreak-style": ["warn", "unix"],
     // "quotes": ["warn", "double"],

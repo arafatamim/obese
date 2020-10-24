@@ -1,7 +1,4 @@
 import React, { useContext } from "react";
-import StoreContext from "../store";
-import { observer } from "mobx-react-lite";
-import shortid from "shortid";
 
 import { GridContainer } from "../components/UI/Container";
 import { CardWithCounter } from "../components/UI/Card";
@@ -11,28 +8,24 @@ import Result from "../components/Result";
 import { ReactComponent as Height } from "../assets/height.svg";
 import { ReactComponent as Weight } from "../assets/weight.svg";
 import { motion } from "framer-motion";
+import { StoreContext } from "../store/StoreContext";
+import { ActionType, Unit } from "../types";
+import { getSliderProps } from "../utils";
 
 const Inputs: React.FC = () => {
-  const store = useContext(StoreContext);
+  const [state, dispatch] = useContext(StoreContext);
 
   const buttonClick = () => {
-    store.isModalOpen = true;
-
-    const date = new Date();
-    const height = store.height;
-    const weight = store.weight;
-    const bmi = store.calculateBMI;
-    const category = store.bmiGroup;
-
-    store.history.unshift({
-      id: shortid.generate(),
-      date: date.toLocaleDateString(),
-      height,
-      weight,
-      bmi,
-      category,
+    dispatch({
+      type: ActionType.CalculateBMI,
+      payload: {
+        height: state.height,
+        weight: state.weight,
+        unit: state.unit,
+      },
     });
-    localStorage.setItem("history", JSON.stringify(store.history));
+
+    dispatch({ type: ActionType.ToggleModal });
   };
 
   return (
@@ -44,28 +37,30 @@ const Inputs: React.FC = () => {
           id="height"
           style={{ gridArea: "height" }}
           title="Height"
-          value={store.height}
-          min={store.minHeight}
-          max={store.maxHeight}
-          step={store.stepValueHeight}
-          unit={store.heightUnit}
+          value={state.height}
+          {...getSliderProps("height", state.unit)}
+          unit={state.unit === Unit.Metric ? "cm" : "ft"}
           icon={<Height width={50} fill="#222" />}
           onChange={(e) => {
-            store.setHeight(Number(e.target.value));
+            dispatch({
+              type: ActionType.SetHeight,
+              payload: Number(e.target.value),
+            });
           }}
         />
         <CardWithCounter
           id="weight"
           style={{ gridArea: "weight" }}
           title="Weight"
-          value={store.weight}
-          min={store.minWeight}
-          max={store.maxWeight}
-          step={store.stepValueWeight}
-          unit={store.weightUnit}
+          value={state.weight}
+          {...getSliderProps("weight", state.unit)}
+          unit={state.unit === Unit.Metric ? "kg" : "lbs"}
           icon={<Weight width={50} fill="#222" />}
           onChange={(e) => {
-            store.setWeight(Number(e.target.value));
+            dispatch({
+              type: ActionType.SetWeight,
+              payload: Number(e.target.value),
+            });
           }}
         />
         <TextButton
@@ -81,4 +76,4 @@ const Inputs: React.FC = () => {
   );
 };
 
-export default observer(Inputs);
+export default Inputs;

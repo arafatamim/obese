@@ -5,6 +5,10 @@
 /.pnp
 .pnp.js
 
+.ionide
+.vscode
+.vim
+
 # testing
 /coverage
 

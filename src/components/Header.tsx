@@ -1,13 +1,12 @@
 import React from "react";
-import { useLocation, useHistory } from "react-router-dom";
 import "./Header.scss";
 import { List } from "react-feather";
+import { useLocation } from 'wouter'
 
 import { IconButton } from "./UI/Button";
 
 const Header: React.FunctionComponent<{ name: string }> = ({ name }) => {
-  const location = useLocation();
-  const history = useHistory();
+  const [location,setLocation] = useLocation();
 
   return (
     <>
@@ -16,12 +15,12 @@ const Header: React.FunctionComponent<{ name: string }> = ({ name }) => {
         <div className="right-aligned">
           <IconButton
             ariaLabel="history"
-            active={location.pathname === "/history"}
+            active={location === "/history"}
             onClick={() => {
-              if (location.pathname === "/history") {
-                history.replace("/");
+              if (location === "/history") {
+                setLocation("/");
               } else {
-                history.replace("/history");
+                setLocation("/history");
               }
             }}>
             <List style={{ boxSizing: "content-box" }} />
