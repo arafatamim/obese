@@ -3,7 +3,6 @@ import { State, HistoryItem } from "../types";
 import { Action } from "../types/action";
 import { storeReducer } from "./storeReducer";
 import useReducerWithSideEffect from "use-reducer-with-side-effects";
-import { convertUnit } from "../utils";
 
 function getLastItem(): HistoryItem | undefined {
   return (JSON.parse(
