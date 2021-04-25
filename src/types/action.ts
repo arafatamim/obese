@@ -25,7 +25,7 @@ interface CalculateBMIAction {
 }
 interface SetHistoryAction {
   type: ActionType.SetHistory;
-  payload: HistoryItem[];
+  payload: HistoryItem;
 }
 interface ClearHistoryAction {
   type: ActionType.ClearHistory;

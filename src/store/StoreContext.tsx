@@ -1,8 +1,7 @@
-import React, { createContext, Dispatch } from "react";
+import React, { createContext, Dispatch, useReducer } from "react";
 import { State, HistoryItem } from "../types";
 import { Action } from "../types/action";
 import { storeReducer } from "./storeReducer";
-import useReducerWithSideEffect from "use-reducer-with-side-effects";
 
 function getLastItem(): HistoryItem | undefined {
   return (JSON.parse(
@@ -26,10 +25,7 @@ export const StoreContext = createContext<[State, Dispatch<Action>]>([
 ]);
 
 const StoreProvider: React.FC = ({ children }) => {
-  const [state, dispatch] = useReducerWithSideEffect<State, Action>(
-    storeReducer,
-    initialState,
-  );
+  const [state, dispatch] = useReducer(storeReducer, initialState);
   return (
     <StoreContext.Provider value={[state, dispatch]}>
       {children}
