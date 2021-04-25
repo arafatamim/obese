@@ -9,7 +9,7 @@ export function convertUnit(
     case "height":
       switch (unit) {
         case Unit.Metric:
-          return Number((value * 30.48).toFixed(2));
+          return Number((value * 30.48).toFixed(1));
         case Unit.US:
           return Number((value / 30.48).toFixed(1));
       }
@@ -17,9 +17,9 @@ export function convertUnit(
     case "weight":
       switch (unit) {
         case Unit.Metric:
-          return Number((value / 2.205).toFixed());
+          return Number((value / 2.205).toFixed(1));
         case Unit.US:
-          return Number((value * 2.205).toFixed());
+          return Number((value * 2.205).toFixed(2));
       }
   }
 }
