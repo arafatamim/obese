@@ -1,7 +1,6 @@
-
 export interface HistoryItem {
   id: string;
-  date: string;
+  date: Date;
   weight: number;
   height: number;
   bmi: number;

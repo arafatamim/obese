@@ -16,7 +16,9 @@ const Table: React.FC<ITableProps> = (props) => {
         <div className={styles.table} key={index}>
           <div>
             <div className={styles.itemName}>
-              <span className={styles.side}>{item.date}</span>
+              <span className={styles.side}>
+                {new Date(item.date).toLocaleDateString()}
+              </span>
             </div>
             <div className={`${styles.heightWeight} ${styles.numbers}`}>
               <div className={styles.itemName}>

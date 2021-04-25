@@ -1,7 +1,6 @@
 import { AnimatePresence, motion } from "framer-motion";
 import React, { useState, useContext, lazy, Suspense } from "react";
 import { useLocation } from "wouter";
-// import { Line } from "react-chartjs-2";
 import Table from "../components/UI/Table";
 import { StoreContext } from "../store/StoreContext";
 import { ActionType } from "../types/action";
@@ -51,8 +50,11 @@ const History: React.FC = () => {
             style={{ marginBottom: "20px" }}>
             <Suspense fallback={<div>Loading...</div>}>
               <Line
+                type="line"
                 data={{
-                  labels: state.history.map((item) => item.date),
+                  labels: state.history.map((item) =>
+                    new Date(item.date).toLocaleDateString(),
+                  ),
                   datasets: [
                     {
                       label: "BMI",
