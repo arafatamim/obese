@@ -10,7 +10,8 @@ import { ReactComponent as Weight } from "../assets/weight.svg";
 import { motion } from "framer-motion";
 import { StoreContext } from "../store/StoreContext";
 import { ActionType, Unit } from "../types";
-import { getSliderProps } from "../utils";
+import { calculateBMI, getSliderProps } from "../utils";
+import { nanoid } from "nanoid";
 
 const Inputs: React.FC = () => {
   const [state, dispatch] = useContext(StoreContext);
@@ -22,6 +23,22 @@ const Inputs: React.FC = () => {
         height: state.height,
         weight: state.weight,
         unit: state.unit,
+      },
+    });
+    const [bmi, category] = calculateBMI(
+      state.height,
+      state.weight,
+      state.unit,
+    );
+    dispatch({
+      type: ActionType.SetHistory,
+      payload: {
+        bmi,
+        category,
+        date: new Date(),
+        height: state.height,
+        weight: state.weight,
+        id: nanoid(3),
       },
     });
 
