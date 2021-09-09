@@ -48,9 +48,8 @@ const History: React.FC = () => {
             initial={{ y: -50, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             style={{ marginBottom: "20px" }}>
-            <Suspense fallback={<div>Loading...</div>}>
+            <Suspense fallback={<div style={{ color:"white" }}>Loading...</div>}>
               <Line
-                type="line"
                 data={{
                   labels: state.history.map((item) =>
                     new Date(item.date).toLocaleDateString(),

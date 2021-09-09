@@ -21,7 +21,7 @@ const initialState: State = {
 
 export const StoreContext = createContext<[State, Dispatch<Action>]>([
   initialState,
-  () => {},
+  e => e,
 ]);
 
 const StoreProvider: React.FC = ({ children }) => {
