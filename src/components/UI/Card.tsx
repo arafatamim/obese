@@ -11,19 +11,27 @@ export const CardWithCounter: React.FC<{
   unit: string;
   icon: JSX.Element;
   style?: React.CSSProperties;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange: (num: number) => void;
 }> = (props) => (
-  <div className={styles.counterCard} style={props.style}>
-    <div className={styles.cardHeader}>
+  <div className={styles["counter-card"]} style={props.style}>
+    <div className={styles["card-header"]}>
       <div>
-        <div className={styles.cardTitle}>
+        <div className={styles["card-title"]}>
           <label htmlFor={props.id}>{props.title}</label>
         </div>
-        <div className={styles.cardSubtitle}>
-          {props.value} <span className={styles.hintText}>{props.unit}</span>
+        <div
+          className={styles["card-subtitle"]}
+          onClick={() => {
+            const value = prompt(`Set value (in ${props.unit})`);
+            if (value != null) {
+              props.onChange(parseInt(value));
+            }
+          }}>
+          {props.value}{" "}
+          <span className={styles["hint-text"]}>{props.unit}</span>
         </div>
       </div>
-      <div className={styles.cardIcon}>{props.icon}</div>
+      <div className={styles["card-icon"]}>{props.icon}</div>
     </div>
     <input
       id={props.id}
@@ -32,7 +40,7 @@ export const CardWithCounter: React.FC<{
       max={props.max}
       step={props.step}
       value={props.value}
-      onChange={props.onChange}
+      onChange={(e) => props.onChange(Number(e.target.value))}
     />
   </div>
 );

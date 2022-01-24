@@ -7,3 +7,9 @@ declare module "*.svg" {
     React.SVGAttributes<SVGElement>
   >;
 }
+declare module "@sscovil/rtf" {
+  declare class RTF {
+    format: (date: Date) => string;
+  }
+  export default RTF;
+}

@@ -58,10 +58,10 @@ const Inputs: React.FC = () => {
           {...getSliderProps("height", state.unit)}
           unit={state.unit === Unit.Metric ? "cm" : "ft"}
           icon={<Height width={50} fill="#222" />}
-          onChange={(e) => {
+          onChange={(number) => {
             dispatch({
               type: ActionType.SetHeight,
-              payload: Number(e.target.value),
+              payload: number,
             });
           }}
         />
@@ -73,12 +73,12 @@ const Inputs: React.FC = () => {
           {...getSliderProps("weight", state.unit)}
           unit={state.unit === Unit.Metric ? "kg" : "lbs"}
           icon={<Weight width={50} fill="#222" />}
-          onChange={(e) => {
+          onChange={(num) =>
             dispatch({
               type: ActionType.SetWeight,
-              payload: Number(e.target.value),
-            });
-          }}
+              payload: num,
+            })
+          }
         />
         <TextButton
           style={{

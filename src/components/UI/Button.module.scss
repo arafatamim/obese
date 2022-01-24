@@ -1,95 +1,87 @@
-.iconButton {
+$shadow-normal: -1px -1px 6px #ffffff33, 1px 1px 6px #000000aa;
+$shadow-active: inset -1px -1px 6px #ffffff33, inset 1px 1px 6px #000000aa;
+
+.icon-button {
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
   background: none;
-  border: 1px solid #444;
+  /* border: 0.5px solid #444; */
+  border: none;
   border-radius: 50%;
-  color: #eee;
+  color: #ddd;
   box-sizing: content-box;
   height: 50px;
   width: 50px;
   padding: 0px;
   transition: 0.2s all;
+  font-size: 0.95rem;
+  line-height: 0.95;
+  word-wrap: normal;
+  white-space: pre-wrap;
+  box-shadow: $shadow-normal;
   &:hover {
-    background: #444;
+    color: #efefef;
   }
   &:focus {
-    box-shadow: inset 0px 0px 0px 2px aqua;
+    color: #efefef;
   }
-  @media (max-width: 500px) {
-    &:active,
-    &:focus,
-    &:hover {
-      outline: none;
-    }
-  }
-  @media (hover: none) {
-    &:focus,
-    &:active,
-    &:hover {
-      background: none;
-    }
+  &:active {
+    box-shadow: $shadow-active;
   }
 }
 .plain {
   border: none;
 }
 .active {
-  background: #ffffff22 !important;
+  box-shadow: $shadow-active;
 }
-.textButton {
+.text-button {
+  --shadow-color: 0deg 0% 0%;
   text-align: center;
   background: linear-gradient(120deg, #009fd9, #00d99c);
   align-items: center;
   vertical-align: middle;
-  box-shadow: 6px 6px 8px #00000040;
   border: none;
   border-radius: 15px;
   color: #eee;
   box-sizing: border-box;
-  padding: 15px;
-  transition: 0.2s all;
+  padding: 17px 15px 15px 15px;
   text-transform: uppercase;
   font-size: 14pt;
-  margin: 0 35%;
-  &:focus {
-    box-shadow: inset 0px 0px 0px 2px aqua;
-  }
-  &:hover {
-    box-shadow: 7px 8px 8px #00000050;
-  }
+  transition: 0.2s all;
+  box-shadow: inset 6px 6px 8px #ffffff40,
+    0px 2px 0.6px hsl(var(--shadow-color) / 0.16),
+    0px 1.8px 2px -0.8px hsl(var(--shadow-color) / 0.16),
+    0px 4.6px 5.2px -1.7px hsl(var(--shadow-color) / 0.16),
+    -0.1px 11.3px 12.7px -2.5px hsl(var(--shadow-color) / 0.16);
   &:active {
-    background: #666;
-  }
-  @media (max-width: 500px) {
-    margin: unset;
-    &:active,
-    &:focus,
-    &:hover {
-      outline: none;
-    }
+    box-shadow: inset 6px 6px 8px #00000040, inset -6px -6px 8px #ffffff40;
   }
 }
 
-.plainButton {
+.plain-button {
   text-align: center;
   background: #333;
   align-items: center;
   vertical-align: middle;
-  border: 1px solid #444;
-  border-radius: 10px;
-  color: #eee;
+  border: none;
+  border-radius: 8px;
+  color: #bbb;
   box-sizing: border-box;
-  padding: 15px;
+  padding: 7px 10px;
   transition: 0.2s all;
   text-transform: uppercase;
-  font-size: 12pt;
-  &:focus {
-    box-shadow: inset 0px 0px 0px 2px aqua;
-  }
+  font-size: 0.9rem;
+  box-shadow: $shadow-normal;
   &:hover {
-    background-color: #444;
+    color: #eee;
+  }
+  &:focus {
+    color: #eee;
+  }
+  &:active {
+    box-shadow: $shadow-active;
   }
 }

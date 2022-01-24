@@ -7,7 +7,7 @@ export const TextButton: React.FC<{
   onClick?: () => void;
 }> = ({ children, style, onClick }) => {
   return (
-    <button className={styles.textButton} style={style} onClick={onClick}>
+    <button className={styles["text-button"]} style={style} onClick={onClick}>
       {children}
     </button>
   );
@@ -19,12 +19,14 @@ export const IconButton: React.FC<{
   active?: boolean;
   plain?: boolean;
   ariaLabel: string;
+  title: string;
   onClick?: () => void;
-}> = ({ children, style, active, onClick, plain, ariaLabel }) => {
+}> = ({ children, title, style, active, onClick, plain, ariaLabel }) => {
   return (
     <button
+      title={title}
       aria-label={ariaLabel}
-      className={`${styles.iconButton} ${active && styles.active} ${
+      className={`${styles["icon-button"]} ${active && styles.active} ${
         plain && styles.plain
       }`}
       style={style}
@@ -40,7 +42,7 @@ export const PlainButton: React.FC<{
   onClick?: () => void;
 }> = (props) => (
   <button
-    className={styles.plainButton}
+    className={styles["plain-button"]}
     style={props.style}
     onClick={props.onClick}>
     {props.children}
