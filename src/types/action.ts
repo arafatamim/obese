@@ -9,6 +9,7 @@ export enum ActionType {
   ClearHistory,
   SetUnit,
   ToggleModal,
+  ToggleAboutDialog,
 }
 
 interface SetHeightAction {
@@ -37,6 +38,9 @@ interface SetUnitAction {
 interface ToggleModalAction {
   type: ActionType.ToggleModal;
 }
+interface ToggleAboutDialogAction {
+  type: ActionType.ToggleAboutDialog;
+}
 
 export type Action =
   | SetHeightAction
@@ -45,4 +49,5 @@ export type Action =
   | SetHistoryAction
   | ClearHistoryAction
   | SetUnitAction
-  | ToggleModalAction;
+  | ToggleModalAction
+  | ToggleAboutDialogAction;

@@ -103,7 +103,7 @@ const History: React.FC = () => {
                 aria-label="Toggle Graph"
                 className={button["plain-button"]}
                 onClick={() => setShowGraph(!showGraph)}>
-                Toggle Graph
+                Graph
               </motion.button>
             </span>
           )}

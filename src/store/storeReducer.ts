@@ -71,6 +71,11 @@ export const storeReducer = (state: State, action: Action): State => {
         ...state,
         modalIsOpen: !state.modalIsOpen,
       };
+    case ActionType.ToggleAboutDialog:
+      return {
+        ...state,
+        aboutModal: !state.aboutModal,
+      };
     default:
       return state;
   }

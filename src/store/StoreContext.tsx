@@ -4,13 +4,14 @@ import { Action } from "../types/action";
 import { storeReducer } from "./storeReducer";
 
 function getLastItem(): HistoryItem | undefined {
-  return (JSON.parse(
-    window.localStorage.getItem("history") ?? "[]",
-  ) as HistoryItem[])[0];
+  return (
+    JSON.parse(window.localStorage.getItem("history") ?? "[]") as HistoryItem[]
+  )[0];
 }
 
 const initialState: State = {
   modalIsOpen: false,
+  aboutModal: false,
   unit: JSON.parse(window.localStorage.getItem("unit") ?? "0"),
   height: getLastItem()?.height ?? 160,
   weight: getLastItem()?.weight ?? 60,
@@ -21,7 +22,7 @@ const initialState: State = {
 
 export const StoreContext = createContext<[State, Dispatch<Action>]>([
   initialState,
-  e => e,
+  (e) => e,
 ]);
 
 const StoreProvider: React.FC = ({ children }) => {

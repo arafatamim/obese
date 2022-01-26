@@ -4,6 +4,8 @@ import { StoreContext } from "./store/StoreContext";
 import Inputs from "./views/Inputs";
 import History from "./views/History";
 import { Route } from "wouter";
+import Result from "./components/Result";
+import About from "./components/About";
 
 const App: React.FunctionComponent = () => {
   const [state] = useContext(StoreContext);
@@ -19,6 +21,7 @@ const App: React.FunctionComponent = () => {
 
       <Route path="/">
         <Inputs />
+        <Result />
       </Route>
 
       <Route path="/history">
@@ -26,6 +29,8 @@ const App: React.FunctionComponent = () => {
           <History />
         </Suspense>
       </Route>
+
+      <About />
     </div>
   );
 };

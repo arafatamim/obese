@@ -20,7 +20,15 @@ const Header: React.FunctionComponent<{ name: string }> = ({ name }) => {
         transition={{ type: "spring", duration: 0.4 }}
         layout="position"
         className="header-container">
-        <span>{name}</span>
+        <div className="left-aligned">
+          <span className="title">{name}</span>
+          <button
+            aria-label="Show About Dialog"
+            title="About This App"
+            onClick={() => dispatch({ type: ActionType.ToggleAboutDialog })}>
+            ?
+          </button>
+        </div>
         <div className="right-aligned">
           <IconButton
             ariaLabel="toggle unit"

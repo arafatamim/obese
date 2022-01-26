@@ -1,0 +1,24 @@
+:root {
+  --shadow-color: 0deg 0% 0%;
+}
+
+$gradient-button-shadow: (
+  "normal": (
+    inset 6px 6px 12px #ffffff20,
+    -4px -4px 12px #ffffff40,
+    0px 2px 0.6px hsl(var(--shadow-color) / 0.16),
+    0px 1.8px 2px -0.8px hsl(var(--shadow-color) / 0.16),
+    0px 4.6px 5.2px -1.7px hsl(var(--shadow-color) / 0.16),
+    -0.1px 11.3px 12.7px -2.5px hsl(var(--shadow-color) / 0.16),
+  ),
+  "active": (
+    inset -4px -4px 6px #ffffff66,
+    inset 1px 1px 6px #000000aa,
+  ),
+);
+
+$card-shadow: inset 10px 12px 15px #ffffffdd, inset -6px -8px 15px #00000033,
+  -4px -4px 8px #ffffff55, 0.1px 0.1px 0.2px hsl(var(--shadow-color) / 0.23),
+  0.9px 1.2px 1.6px -0.9px hsl(var(--shadow-color) / 0.22),
+  2.8px 3.6px 5px -1.8px hsl(var(--shadow-color) / 0.21),
+  7.4px 9.7px 13.3px -2.7px hsl(var(--shadow-color) / 0.2);

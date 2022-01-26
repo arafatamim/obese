@@ -4,6 +4,7 @@ import { Unit } from "./unit";
 
 export type State = {
   modalIsOpen: boolean;
+  aboutModal: boolean;
   unit: Unit;
   height: number;
   weight: number;

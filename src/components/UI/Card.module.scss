@@ -1,14 +1,11 @@
+@use "../../variables.scss" as v;
+
 .counter-card {
-  --shadow-color: 0deg 0% 0%;
   background-color: #eee;
   border-radius: 15px;
   padding: 30px;
-  box-shadow: inset 10px 12px 8px #ffffffdd, inset -6px -8px 8px #00000033,
-    -6px -6px 8px #ffffff55, 0.2px 0.3px 0.4px hsl(var(--shadow-color) / 0.3),
-    1.1px 1.5px 2.1px -1.2px hsl(var(--shadow-color) / 0.25),
-    4.4px 5.9px 8.3px -2.5px hsl(var(--shadow-color) / 0.15);
-  display: flex;
   flex-direction: column;
+  box-shadow: v.$card-shadow;
 }
 
 .card-header {
@@ -30,7 +27,7 @@
   font-size: 30px;
   font-weight: 600;
   color: #333;
-  text-align: center;
+  text-align: left;
   margin-bottom: 10px;
   cursor: pointer;
 }
@@ -40,64 +37,85 @@
   font-weight: 500;
 }
 
+@mixin track {
+  width: 100%;
+  height: 15px;
+  cursor: pointer;
+  background: linear-gradient(120deg, #009fd9, #00d99c);
+  box-shadow: inset 2px 2px 6px #00000066, inset -2px -2px 6px #ffffffaa;
+  border-radius: 15px;
+}
+@mixin thumb {
+  box-shadow: inset 4px 4px 2px #ffffffff, inset -4px -4px 5px #00000017,
+    5px 5px 10px #00000035;
+  height: 30px;
+  width: 60px;
+  border: none;
+  border-radius: 60px;
+  background: #ffffff;
+  cursor: pointer;
+  -webkit-appearance: none;
+  margin-top: -7px;
+  transition: 0.2s all;
+}
+@mixin thumb-hocus {
+  box-shadow: inset 4px 4px 4px #ffffffff, inset -4px -4px 4px #00000011,
+    5px 5px 10px #00000045;
+}
+@mixin thumb-active {
+  box-shadow: inset 4px 4px 4px #ffffffff, inset -0.3px -0.3px 4px #00000055,
+    3px 3px 4px #00000045;
+  transform: scale(0.95);
+}
+@mixin track-hocus {
+  box-shadow: inset 2px 2px 6px #00000088, inset -2px -2px 6px #ffffffaa;
+  background: grey;
+}
+
 input[type="range"] {
   -webkit-appearance: none;
   margin-top: 15px;
   width: 100%;
   background: transparent;
+
   &::-webkit-slider-runnable-track {
-    width: 100%;
-    height: 15px;
-    cursor: pointer;
-    background: linear-gradient(120deg, #009fd9, #00d99c);
-    box-shadow: inset 2px 2px 6px #00000066, inset -2px -2px 6px #ffffffaa;
-    border-radius: 15px;
-  }
-  &::-webkit-slider-thumb {
-    box-shadow: inset 0px 4px 2px #ffffffff, inset 0px -4px 3px #00000017,
-      0px 5px 10px #00000035;
-    height: 30px;
-    width: 60px;
-    border-radius: 60px;
-    background: #ffffff;
-    cursor: pointer;
-    -webkit-appearance: none;
-    margin-top: -7px;
-    transition: 0.2s all;
-  }
-  &:hover::-webkit-slider-thumb {
-    box-shadow: inset 0px 4px 4px #ffffffff, inset 0px -4px 4px #00000011,
-      0px 5px 10px #00000045;
-  }
-  &:focus::-webkit-slider-thumb {
-    box-shadow: inset 0px 4px 4px #ffffffff, inset 0px -4px 4px #00000011,
-      0px 5px 10px #00000045;
-  }
-  &:active::-webkit-slider-thumb {
-    box-shadow: inset 0px 4px 4px #ffffffff, inset 0px -0.3px 4px #00000055,
-      0px 3px 4px #00000045;
+    @include track;
   }
   &:focus::-webkit-slider-runnable-track {
-    box-shadow: inset 0px 2px 6px #00000088;
-    background: grey;
+    @include track-hocus;
   }
   &::-moz-range-track {
-    width: 100%;
-    height: 15px;
-    cursor: pointer;
-    -webkit-animate: 0.2s;
-    animation: 0.2s;
-    background: linear-gradient(120deg, #009fd9, #00d99c);
-    border-radius: 15px;
+    @include track;
+  }
+  &:focus::-moz-range-track {
+    @include track-hocus;
+  }
+
+  &::-webkit-slider-thumb {
+    @include thumb;
+  }
+  &:hover::-webkit-slider-thumb {
+    @include thumb-hocus;
+  }
+  &:focus::-webkit-slider-thumb {
+    @include thumb-hocus;
+  }
+  &:active::-webkit-slider-thumb {
+    @include thumb-active;
   }
   &::-moz-range-thumb {
-    box-shadow: 5px 5px 10px #00000035;
-    height: 30px;
-    width: 30px;
-    border-radius: 50px;
-    background: #ffffff;
-    cursor: pointer;
+    @include thumb;
   }
+  &:hover::-moz-range-thumb {
+    @include thumb-hocus;
+  }
+  &:focus::-moz-range-thumb {
+    @include thumb-hocus;
+  }
+  &:active::-moz-range-thumb {
+    @include thumb-active;
+  }
+
   &::-ms-track {
     width: 100%;
     height: 5px;

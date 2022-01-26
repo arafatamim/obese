@@ -1,10 +1,28 @@
 .header-container {
-  color: #eee;
-  font-size: 2rem;
+  & .title {
+    color: #cdcdcd;
+    font-size: 2rem;
+  }
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 2rem;
+}
+.left-aligned {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  & button {
+    border: none;
+    border-radius: 50%;
+    width: 3ch;
+    height: 3ch;
+    background: #2a2a2a;
+    color: #aaa;
+    &:focus {
+      background: #222;
+    }
+  }
 }
 .right-aligned {
   display: flex;

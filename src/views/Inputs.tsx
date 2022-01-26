@@ -87,7 +87,6 @@ const Inputs: React.FC = () => {
           onClick={buttonClick}>
           Calculate BMI
         </TextButton>
-        <Result />
       </GridContainer>
     </motion.div>
   );
